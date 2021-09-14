@@ -6,28 +6,31 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1126</width>
-    <height>657</height>
+    <width>1920</width>
+    <height>1080</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>ADS-B Decoder Simulation</string>
+  </property>
+  <property name="statusTip">
+   <string/>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QLabel" name="timeLabel">
+   <widget class="QLabel" name="labelTime">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>10</y>
-      <width>181</width>
-      <height>61</height>
+      <x>1720</x>
+      <y>190</y>
+      <width>151</width>
+      <height>81</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Digital-7 Italic</family>
-      <pointsize>30</pointsize>
-      <italic>true</italic>
+      <family>Roboto Condensed</family>
+      <pointsize>25</pointsize>
+      <italic>false</italic>
      </font>
     </property>
     <property name="toolTip">
@@ -40,90 +43,519 @@
      <string>23:59:59</string>
     </property>
    </widget>
-   <widget class="QLabel" name="dateLabel">
+   <widget class="QLabel" name="labelDate">
     <property name="geometry">
      <rect>
-      <x>20</x>
-      <y>90</y>
-      <width>351</width>
-      <height>61</height>
+      <x>1310</x>
+      <y>130</y>
+      <width>571</width>
+      <height>101</height>
      </rect>
     </property>
     <property name="font">
      <font>
-      <family>Bebas</family>
-      <pointsize>20</pointsize>
+      <family>Roboto Condensed</family>
+      <pointsize>25</pointsize>
+      <strikeout>false</strikeout>
      </font>
     </property>
     <property name="toolTip">
      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Date&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
     </property>
+    <property name="layoutDirection">
+     <enum>Qt::RightToLeft</enum>
+    </property>
     <property name="text">
      <string>WEDNESDAY, 31 DECEMBER 2021</string>
     </property>
    </widget>
-   <widget class="QLabel" name="labelComPort">
+   <widget class="QPushButton" name="buttonDecode">
+    <property name="enabled">
+     <bool>true</bool>
+    </property>
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>210</y>
-      <width>55</width>
+      <x>30</x>
+      <y>20</y>
+      <width>171</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>21</pointsize>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="text">
+     <string>DECODE</string>
+    </property>
+    <property name="autoDefault">
+     <bool>false</bool>
+    </property>
+    <property name="default">
+     <bool>true</bool>
+    </property>
+    <property name="flat">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="Line" name="separator">
+    <property name="geometry">
+     <rect>
+      <x>0</x>
+      <y>100</y>
+      <width>1920</width>
       <height>16</height>
      </rect>
     </property>
-    <property name="text">
-     <string>COM Port</string>
+    <property name="orientation">
+     <enum>Qt::Horizontal</enum>
     </property>
    </widget>
-   <widget class="QLabel" name="labelBaudrate">
+   <widget class="QLineEdit" name="textBoxDecode">
     <property name="geometry">
      <rect>
-      <x>40</x>
-      <y>250</y>
-      <width>55</width>
+      <x>220</x>
+      <y>20</y>
+      <width>511</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>21</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="dragEnabled">
+     <bool>false</bool>
+    </property>
+   </widget>
+   <widget class="QRadioButton" name="radioTc1_4">
+    <property name="geometry">
+     <rect>
+      <x>810</x>
+      <y>20</y>
+      <width>16</width>
       <height>16</height>
      </rect>
     </property>
-    <property name="text">
-     <string>Baudrate</string>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="comboBoxPort">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>210</y>
-      <width>101</width>
-      <height>22</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QComboBox" name="comboBoxBaudrate">
-    <property name="geometry">
-     <rect>
-      <x>110</x>
-      <y>250</y>
-      <width>101</width>
-      <height>21</height>
-     </rect>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>280</x>
-      <y>210</y>
-      <width>93</width>
-      <height>28</height>
-     </rect>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>72</pointsize>
+     </font>
     </property>
     <property name="text">
-     <string>PushButton</string>
+     <string/>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">tc</string>
+    </attribute>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>770</x>
+      <y>60</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>21</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>TC 1-4</string>
     </property>
    </widget>
+   <widget class="QRadioButton" name="radioTc5_8">
+    <property name="geometry">
+     <rect>
+      <x>930</x>
+      <y>20</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>72</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">tc</string>
+    </attribute>
+   </widget>
+   <widget class="QRadioButton" name="radioTc9_18">
+    <property name="geometry">
+     <rect>
+      <x>1060</x>
+      <y>20</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>72</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">tc</string>
+    </attribute>
+   </widget>
+   <widget class="QRadioButton" name="radioTc19">
+    <property name="geometry">
+     <rect>
+      <x>1190</x>
+      <y>20</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>72</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">tc</string>
+    </attribute>
+   </widget>
+   <widget class="QRadioButton" name="radioTc20_22">
+    <property name="geometry">
+     <rect>
+      <x>1320</x>
+      <y>20</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>72</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">tc</string>
+    </attribute>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_6">
+    <property name="geometry">
+     <rect>
+      <x>1470</x>
+      <y>20</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>72</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">tc</string>
+    </attribute>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_7">
+    <property name="geometry">
+     <rect>
+      <x>1600</x>
+      <y>20</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>72</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">tc</string>
+    </attribute>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_8">
+    <property name="geometry">
+     <rect>
+      <x>1710</x>
+      <y>20</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>72</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">tc</string>
+    </attribute>
+   </widget>
+   <widget class="QRadioButton" name="radioButton_9">
+    <property name="geometry">
+     <rect>
+      <x>1820</x>
+      <y>20</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>72</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <attribute name="buttonGroup">
+     <string notr="true">tc</string>
+    </attribute>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>890</x>
+      <y>60</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>21</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>TC 5-8</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>1020</x>
+      <y>60</y>
+      <width>111</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>21</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>TC 9-18</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_4">
+    <property name="geometry">
+     <rect>
+      <x>1160</x>
+      <y>60</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>21</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>TC 19</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_5">
+    <property name="geometry">
+     <rect>
+      <x>1270</x>
+      <y>60</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>21</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>TC 20-22</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_6">
+    <property name="geometry">
+     <rect>
+      <x>1790</x>
+      <y>60</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>21</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>TC 31</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_7">
+    <property name="geometry">
+     <rect>
+      <x>1420</x>
+      <y>60</y>
+      <width>131</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>21</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>TC 23-27</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_8">
+    <property name="geometry">
+     <rect>
+      <x>1570</x>
+      <y>60</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>21</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>TC 28</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_9">
+    <property name="geometry">
+     <rect>
+      <x>1680</x>
+      <y>60</y>
+      <width>91</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>21</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>TC 29</string>
+    </property>
+   </widget>
+   <widget class="QTextEdit" name="textBoxAdsb">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>140</y>
+      <width>1861</width>
+      <height>851</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>13</pointsize>
+     </font>
+    </property>
+    <property name="readOnly">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <zorder>buttonDecode</zorder>
+   <zorder>separator</zorder>
+   <zorder>textBoxDecode</zorder>
+   <zorder>radioTc1_4</zorder>
+   <zorder>label</zorder>
+   <zorder>radioTc5_8</zorder>
+   <zorder>radioTc9_18</zorder>
+   <zorder>radioTc19</zorder>
+   <zorder>radioTc20_22</zorder>
+   <zorder>radioButton_6</zorder>
+   <zorder>radioButton_7</zorder>
+   <zorder>radioButton_8</zorder>
+   <zorder>radioButton_9</zorder>
+   <zorder>label_2</zorder>
+   <zorder>label_3</zorder>
+   <zorder>label_4</zorder>
+   <zorder>label_5</zorder>
+   <zorder>label_6</zorder>
+   <zorder>label_7</zorder>
+   <zorder>label_8</zorder>
+   <zorder>label_9</zorder>
+   <zorder>textBoxAdsb</zorder>
+   <zorder>labelDate</zorder>
+   <zorder>labelTime</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <resources/>
  <connections/>
+ <buttongroups>
+  <buttongroup name="tc"/>
+ </buttongroups>
 </ui>
