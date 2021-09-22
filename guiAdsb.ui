@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>ADS-B Decoder Simulation</string>
+   <string>SIDEAS - Simulasi Decoder ADS-B</string>
   </property>
   <property name="statusTip">
    <string/>
@@ -267,7 +267,7 @@
      <string notr="true">tc</string>
     </attribute>
    </widget>
-   <widget class="QRadioButton" name="radioButton_6">
+   <widget class="QRadioButton" name="radioTc23_27">
     <property name="geometry">
      <rect>
       <x>1470</x>
@@ -289,7 +289,7 @@
      <string notr="true">tc</string>
     </attribute>
    </widget>
-   <widget class="QRadioButton" name="radioButton_7">
+   <widget class="QRadioButton" name="radioTc28">
     <property name="geometry">
      <rect>
       <x>1600</x>
@@ -311,7 +311,7 @@
      <string notr="true">tc</string>
     </attribute>
    </widget>
-   <widget class="QRadioButton" name="radioButton_8">
+   <widget class="QRadioButton" name="radioTc29">
     <property name="geometry">
      <rect>
       <x>1710</x>
@@ -333,7 +333,7 @@
      <string notr="true">tc</string>
     </attribute>
    </widget>
-   <widget class="QRadioButton" name="radioButton_9">
+   <widget class="QRadioButton" name="radioTc31">
     <property name="geometry">
      <rect>
       <x>1820</x>
@@ -535,10 +535,10 @@
    <zorder>radioTc9_18</zorder>
    <zorder>radioTc19</zorder>
    <zorder>radioTc20_22</zorder>
-   <zorder>radioButton_6</zorder>
-   <zorder>radioButton_7</zorder>
-   <zorder>radioButton_8</zorder>
-   <zorder>radioButton_9</zorder>
+   <zorder>radioTc23_27</zorder>
+   <zorder>radioTc28</zorder>
+   <zorder>radioTc29</zorder>
+   <zorder>radioTc31</zorder>
    <zorder>label_2</zorder>
    <zorder>label_3</zorder>
    <zorder>label_4</zorder>
