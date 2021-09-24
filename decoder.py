@@ -10,7 +10,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def __init__(self, *args, **kwargs):
         super(MainWindow, self).__init__(*args, **kwargs)
-        uic.loadUi("guiadsb.ui", self)
+        uic.loadUi("decoder.ui", self)
         self.timer = QTimer()
         self.componentui()
         self.initui()
