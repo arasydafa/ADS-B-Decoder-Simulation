@@ -20,10 +20,10 @@
    <widget class="QLabel" name="labelTime">
     <property name="geometry">
      <rect>
-      <x>1720</x>
-      <y>190</y>
+      <x>1740</x>
+      <y>100</y>
       <width>151</width>
-      <height>81</height>
+      <height>91</height>
      </rect>
     </property>
     <property name="font">
@@ -42,14 +42,17 @@
     <property name="text">
      <string>23:59:59</string>
     </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
+    </property>
    </widget>
    <widget class="QLabel" name="labelDate">
     <property name="geometry">
      <rect>
-      <x>1310</x>
-      <y>130</y>
+      <x>1120</x>
+      <y>100</y>
       <width>571</width>
-      <height>101</height>
+      <height>91</height>
      </rect>
     </property>
     <property name="font">
@@ -67,6 +70,9 @@
     </property>
     <property name="text">
      <string>WEDNESDAY, 31 DECEMBER 2021</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
    <widget class="QPushButton" name="buttonDecode">
@@ -511,9 +517,9 @@
     <property name="geometry">
      <rect>
       <x>30</x>
-      <y>140</y>
+      <y>180</y>
       <width>1861</width>
-      <height>851</height>
+      <height>811</height>
      </rect>
     </property>
     <property name="font">
@@ -524,6 +530,61 @@
     </property>
     <property name="readOnly">
      <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="buttonBack">
+    <property name="geometry">
+     <rect>
+      <x>30</x>
+      <y>120</y>
+      <width>171</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>21</pointsize>
+     </font>
+    </property>
+    <property name="cursor">
+     <cursorShape>PointingHandCursor</cursorShape>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">file:///C:/Users/USER/PycharmProjects/ADS-B Simple Decoder/assets/back-arrow.png;
+</string>
+    </property>
+    <property name="text">
+     <string>BACK</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="labelTime_2">
+    <property name="geometry">
+     <rect>
+      <x>1700</x>
+      <y>130</y>
+      <width>20</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>Roboto Condensed</family>
+      <pointsize>25</pointsize>
+      <italic>false</italic>
+     </font>
+    </property>
+    <property name="toolTip">
+     <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Time&lt;/p&gt;&lt;p&gt;&lt;br/&gt;&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::NoFrame</enum>
+    </property>
+    <property name="text">
+     <string>-</string>
+    </property>
+    <property name="alignment">
+     <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
     </property>
    </widget>
    <zorder>buttonDecode</zorder>
@@ -550,6 +611,8 @@
    <zorder>textBoxAdsb</zorder>
    <zorder>labelDate</zorder>
    <zorder>labelTime</zorder>
+   <zorder>buttonBack</zorder>
+   <zorder>labelTime_2</zorder>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
