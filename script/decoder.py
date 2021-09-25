@@ -1,23 +1,24 @@
 import sys
-import traceback
 import pyModeS as pms
 from PyQt5 import QtWidgets, uic, QtGui, QtCore
+from PyQt5.QtGui import QIcon
 from PyQt5.QtWidgets import QGraphicsDropShadowEffect
 from PyQt5.QtCore import QTimer, QTime, QDate, pyqtSlot
 
 
-class MainWindow(QtWidgets.QMainWindow):
+class DecoderWindow(QtWidgets.QMainWindow):
+    switchWindow = QtCore.pyqtSignal()
 
     def __init__(self, *args, **kwargs):
-        super(MainWindow, self).__init__(*args, **kwargs)
-        uic.loadUi("decoder.ui", self)
+        super(DecoderWindow, self).__init__(*args, **kwargs)
+        uic.loadUi("../ui/decoder.ui", self)
         self.timer = QTimer()
         self.componentui()
         self.initui()
 
     def componentui(self):
         # Window Styling
-        self.setWindowIcon(QtGui.QIcon("assets/sideas.png"))
+        self.setWindowIcon(QtGui.QIcon("../assets/sideas.png"))
 
         # Button Decode Styling
         shadow = QGraphicsDropShadowEffect()
@@ -41,9 +42,13 @@ class MainWindow(QtWidgets.QMainWindow):
                                        "font-size : 20px;"
                                        "font-style : bold;")
 
-        # Date and Time Label Styling
-        self.labelDate.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
-        self.labelTime.setAlignment(QtCore.Qt.AlignRight | QtCore.Qt.AlignVCenter)
+        # Back Button Styling
+        self.buttonBack.setStyleSheet("color : #003566;"
+                                      "background:transparent;"
+                                      "color: #003566;"
+                                      "border : 0;")
+        self.buttonBack.setIcon(QIcon("../assets/back-arrow.png"))
+        self.buttonBack.setIconSize(QtCore.QSize(40, 40))
 
     def initui(self):
         self.timer.timeout.connect(self.showtime)
@@ -54,6 +59,7 @@ class MainWindow(QtWidgets.QMainWindow):
 
         self.buttonDecode.clicked.connect(self.decode_onclick)
         self.textBoxDecode.returnPressed.connect(self.decode_onclick)
+        self.buttonBack.clicked.connect(self.homewindow)
 
         self.radioTc1_4.clicked.connect(self.radiostate)
         self.radioTc5_8.toggled.connect(self.radiostate)
@@ -75,6 +81,12 @@ class MainWindow(QtWidgets.QMainWindow):
         stringDate = currentDate.toString('dddd, dd MMMM yyyy')
         self.labelDate.setText(stringDate)
 
+    def homewindow(self):
+        from home import HomeWindow
+
+        self.homeOpen = HomeWindow(self)
+        self.close()
+        self.homeOpen.showMaximized()
 
     @pyqtSlot()
     def radiostate(self):
@@ -101,10 +113,10 @@ class MainWindow(QtWidgets.QMainWindow):
             self.textBoxDecode.setText("8D7C7181E1050B00000000C13340")
 
         elif self.radioTc29.isChecked():
-            self.textBoxDecode.setText("8D7C3F18E8000020713800DA52FD")
+            self.textBoxDecode.setText("8DA8BBE7EA0BD870013F082BC5C5")
 
         elif self.radioTc31.isChecked():
-            self.textBoxDecode.setText("8D7C7181E1050B00000000C13340")
+            self.textBoxDecode.setText("8D7C7181F80000060049A8F9E70F")
 
     def decode_onclick(self):
         textBoxDecodeValue = self.textBoxDecode.text()
@@ -114,7 +126,7 @@ class MainWindow(QtWidgets.QMainWindow):
         message = textBoxDecodeValue
         dataFrame = pms.df(message)
         lengthBit = len(pms.hex2bin(message))
-        typeCode = pms.typecode(message)
+        typeCode = pms.adsb.typecode(message)
         icao = pms.icao(message)
 
         # Binary
@@ -271,6 +283,20 @@ class MainWindow(QtWidgets.QMainWindow):
                                      f"\t\t\t\t| {len(dataFrameBinary)}         | {len(transponderBinary)}     | {len(icaoBinary)}                                                  | {len(messageBinary)}                                                                                                             | {len(parityBinary)}                                                |\n"
                                      f"")
 
+        if typeCode == 29:
+            self.textBoxAdsb.setText(f"Frame\t\t\t : {message} \n"
+                                     f"Length\t\t\t : {lengthBit} bits\n"
+                                     f"Downlink Format (DF)\t : ({dataFrame}) ADS-B \n"
+                                     f"Type Code (TC)\t\t : {typeCode} - Aircraft Status\n"
+                                     f"ICAO\t\t\t : {icao}\n"
+                                     f"Vertical Status \t\t : Airborne\n\n"
+                                     f"\t\t\t\t| DF       | CA   | ICAO                                             | ME                                                                                                           | PI                                                |\n"
+                                     f"\t\t\t\t-------------+-------+------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+----------------------------------------------------+\n"
+                                     f"\t\t\t\t| {dataFrameBinary} | {transponderBinary} | {icaoBinary} | {messageBinary} | {parityBinary} |\n"
+                                     f"\t\t\t\t-------------+-------+------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+----------------------------------------------------+\n"
+                                     f"\t\t\t\t| {len(dataFrameBinary)}         | {len(transponderBinary)}     | {len(icaoBinary)}                                                  | {len(messageBinary)}                                                                                                             | {len(parityBinary)}                                                |\n"
+                                     f"")
+
         if typeCode == 31:
             subType = pms.bin2int(adsbBinary[37:40])
             compassHeading = ""
@@ -286,7 +312,7 @@ class MainWindow(QtWidgets.QMainWindow):
                                      f"Type Code (TC)\t\t : {typeCode} - Aircraft Operation Status\n"
                                      f"Vertical Status \t\t : On The Ground\n"
                                      f"Sub Type\t\t\t : {subType}\n"
-                                     f"Compass Heading\t : {compassHeading}\n\n" # Data masih belum akurat
+                                     f"Compass Heading\t : {compassHeading}\n\n"  # Data masih belum akurat
                                      f"\t\t\t\t| DF       | CA   | ICAO                                             | ME                                                                                                           | PI                                                |\n"
                                      f"\t\t\t\t-------------+-------+------------------------------------------------------+-----------------------------------------------------------------------------------------------------------------+----------------------------------------------------+\n"
                                      f"\t\t\t\t| {dataFrameBinary} | {transponderBinary} | {icaoBinary} | {messageBinary} | {parityBinary} |\n"
@@ -299,16 +325,16 @@ class MainWindow(QtWidgets.QMainWindow):
         assert False
 
 
-def excepthook(exc_type, exc_value, exc_tb):
-    tb = "".join(traceback.format_exception(exc_type, exc_value, exc_tb))
-    print("Error Catched! : ")
-    print("Error Message :\n", tb)
-    QtWidgets.QApplication.quit()
+def my_exception_hook(exctype, value, traceback):
+    print(exctype, value, traceback)
+    sys._excepthook(exctype, value, traceback)
+    sys.exit(1)
 
 
 if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
-    sys.catch_exception = excepthook
-    window = MainWindow()
-    window.show()
+    sys._excepthook = sys.excepthook
+    sys.excepthook = my_exception_hook
+    window = DecoderWindow()
+    window.showMaximized()
     app.exec_()
