@@ -1,13 +1,13 @@
+import string
 import sys
 import pyModeS as pms
 from PyQt5 import QtWidgets, uic, QtGui, QtCore
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QGraphicsDropShadowEffect
+from PyQt5.QtWidgets import QGraphicsDropShadowEffect, QMessageBox
 from PyQt5.QtCore import QTimer, QTime, QDate, pyqtSlot
 
 
 class DecoderWindow(QtWidgets.QMainWindow):
-    switchWindow = QtCore.pyqtSignal()
 
     def __init__(self, *args, **kwargs):
         super(DecoderWindow, self).__init__(*args, **kwargs)
@@ -59,7 +59,7 @@ class DecoderWindow(QtWidgets.QMainWindow):
 
         self.buttonDecode.clicked.connect(self.decode_onclick)
         self.textBoxDecode.returnPressed.connect(self.decode_onclick)
-        self.buttonBack.clicked.connect(self.homewindow)
+        self.buttonBack.clicked.connect(self.menuwindow)
 
         self.radioTc1_4.clicked.connect(self.radiostate)
         self.radioTc5_8.toggled.connect(self.radiostate)
@@ -81,12 +81,12 @@ class DecoderWindow(QtWidgets.QMainWindow):
         stringDate = currentDate.toString('dddd, dd MMMM yyyy')
         self.labelDate.setText(stringDate)
 
-    def homewindow(self):
-        from home import HomeWindow
+    def menuwindow(self):
+        from menu import MenuWindow
 
-        self.homeOpen = HomeWindow(self)
+        self.menuOpen = MenuWindow(self)
         self.close()
-        self.homeOpen.showMaximized()
+        self.menuOpen.showMaximized()
 
     @pyqtSlot()
     def radiostate(self):
@@ -128,6 +128,12 @@ class DecoderWindow(QtWidgets.QMainWindow):
         lengthBit = len(pms.hex2bin(message))
         typeCode = pms.adsb.typecode(message)
         icao = pms.icao(message)
+
+        # Conditional
+        cekHex = all(c in string.hexdigits for c in message)
+
+        # if lengthBit != 12 or cekHex == False:
+        #     QMessageBox.about(self, "Title", "Message", QMessageBox.Ok)
 
         # Binary
         adsbBinary = pms.hex2bin(message)

@@ -1,12 +1,15 @@
 import sys
 from PyQt5 import QtWidgets, uic, QtGui
+from PyQt5.QtGui import QIcon
+from PyQt5.QtWidgets import QGraphicsDropShadowEffect
+from PyQt5.uic.properties import QtCore
 
 
-class HomeWindow(QtWidgets.QMainWindow):
+class AboutWindow(QtWidgets.QMainWindow):
 
     def __init__(self, *args, **kwargs):
-        super(HomeWindow, self).__init__(*args, **kwargs)
-        uic.loadUi("../ui/home.ui", self)
+        super(AboutWindow, self).__init__(*args, **kwargs)
+        uic.loadUi("../ui/about.ui", self)
         self.componentui()
         self.initui()
 
@@ -14,13 +17,17 @@ class HomeWindow(QtWidgets.QMainWindow):
         # Window Styling
         self.setWindowIcon(QtGui.QIcon("../assets/sideas.png"))
 
-        # Button Styling
-        self.buttonStart.setStyleSheet("color : #FFE921;"
-                                       "background-color: #370202;"
-                                       "border-radius: 15px;")
+        # Back Button Styling
+        self.buttonBack.setStyleSheet("color : #003566;"
+                                      "background:transparent;"
+                                      "color: #003566;"
+                                      "border : 0;")
+        self.buttonBack.setIcon(QIcon("../assets/back-arrow.png"))
+        self.buttonBack.setIconSize(QtCore.QSize(40, 40))
+
 
     def initui(self):
-        self.buttonStart.clicked.connect(self.menuwindow)
+        self.buttonBack.clicked.connect(self.menuwindow)
 
     def menuwindow(self):
         from menu import MenuWindow
@@ -44,6 +51,6 @@ if __name__ == "__main__":
     app = QtWidgets.QApplication(sys.argv)
     sys._excepthook = sys.excepthook
     sys.excepthook = my_exception_hook
-    window = HomeWindow()
+    window = AboutWindow()
     window.showMaximized()
     app.exec_()
