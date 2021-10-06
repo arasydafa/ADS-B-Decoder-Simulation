@@ -165,6 +165,25 @@
      <string>TO</string>
     </property>
    </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>1460</x>
+      <y>50</y>
+      <width>401</width>
+      <height>151</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="pixmap">
+     <pixmap>../assets/logolapanxpens.png</pixmap>
+    </property>
+    <property name="scaledContents">
+     <bool>true</bool>
+    </property>
+   </widget>
    <zorder>labelBackground</zorder>
    <zorder>labelLogo</zorder>
    <zorder>labelTitleBack</zorder>
@@ -172,6 +191,7 @@
    <zorder>buttonStart</zorder>
    <zorder>labelToBack</zorder>
    <zorder>labelToFront</zorder>
+   <zorder>label</zorder>
   </widget>
  </widget>
  <resources/>
