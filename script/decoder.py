@@ -3,7 +3,7 @@ import sys
 import pyModeS as pms
 from PyQt5 import QtWidgets, uic, QtGui, QtCore
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QGraphicsDropShadowEffect, QMessageBox
+from PyQt5.QtWidgets import QGraphicsDropShadowEffect
 from PyQt5.QtCore import QTimer, QTime, QDate, pyqtSlot
 
 
@@ -166,8 +166,8 @@ class DecoderWindow(QtWidgets.QMainWindow):
         # Type Code 5-8
         if 5 <= typeCode <= 8:
             cprFormat = pms.adsb.oe_flag(message)
-            cprLat = pms.bin2int(adsbBinary[54:71]) / 131072.0
-            cprLon = pms.bin2int(adsbBinary[71:88]) / 131072.0
+            cprLat = pms.bin2int(adsbBinary[54:71])
+            cprLon = pms.bin2int(adsbBinary[71:88])
             velocity = pms.adsb.surface_velocity(message)
 
             self.textBoxAdsb.setText(f"Frame\t\t\t : {message} \n"
@@ -176,8 +176,8 @@ class DecoderWindow(QtWidgets.QMainWindow):
                                      f"Type Code (TC)\t\t : {typeCode} - Surface position\n"
                                      f"ICAO\t\t\t : {icao}\n"
                                      f"CPR Format\t\t : {'Odd' if cprFormat else 'Even'}\n"
-                                     f"CPR Latitude\t\t : {cprLat}\n"
-                                     f"CPR Longitude\t\t : {cprLon}\n"
+                                     f"CPR Latitude\t\t : {cprLat} - {cprLat / 131072.0}\n"
+                                     f"CPR Longitude\t\t : {cprLon} - {cprLon / 131072.0}\n"
                                      f"Speed\t\t\t : {velocity[0]} knots\n"
                                      f"Track\t\t\t : {velocity[1]} degrees\n"
                                      f"Vertical Status \t\t : Airborne\n\n"
@@ -190,8 +190,8 @@ class DecoderWindow(QtWidgets.QMainWindow):
 
         if 9 <= typeCode <= 18:
             cprFormat = pms.adsb.oe_flag(message)
-            cprLat = pms.bin2int(adsbBinary[54:71]) / 131072.0
-            cprLon = pms.bin2int(adsbBinary[71:88]) / 131072.0
+            cprLat = pms.bin2int(adsbBinary[54:71])
+            cprLon = pms.bin2int(adsbBinary[71:88])
             altitude = pms.adsb.altitude(message)
 
             self.textBoxAdsb.setText(f"Frame\t\t\t : {message} \n"
@@ -200,8 +200,8 @@ class DecoderWindow(QtWidgets.QMainWindow):
                                      f"Type Code (TC)\t\t : {typeCode} - Airborne position (with barometric altitude)\n"
                                      f"ICAO\t\t\t : {icao}\n"
                                      f"CPR Format\t\t : {'Odd' if cprFormat else 'Even'}\n"
-                                     f"CPR Latitude\t\t : {cprLat}\n"
-                                     f"CPR Longitude\t\t : {cprLon}\n"
+                                     f"CPR Latitude\t\t : {cprLat} - {cprLat / 131072.0}\n"
+                                     f"CPR Longitude\t\t : {cprLon} - {cprLon / 131072.0}\n"
                                      f"Altitude\t\t\t : {altitude} feet\n"
                                      f"Vertical Status \t\t : Airborne\n\n"
                                      f"\t\t\t\t| DF       | CA   | ICAO                                             | ME                                                                                                           | PI                                                |\n"
@@ -233,8 +233,8 @@ class DecoderWindow(QtWidgets.QMainWindow):
 
         if 20 <= typeCode <= 22:
             cprFormat = pms.adsb.oe_flag(message)
-            cprLat = pms.bin2int(adsbBinary[54:71]) / 131072.0
-            cprLon = pms.bin2int(adsbBinary[71:88]) / 131072.0
+            cprLat = pms.bin2int(adsbBinary[54:71])
+            cprLon = pms.bin2int(adsbBinary[71:88])
             altitude = pms.adsb.altitude(message)
 
             self.textBoxAdsb.setText(f"Frame\t\t\t : {message} \n"
@@ -243,8 +243,8 @@ class DecoderWindow(QtWidgets.QMainWindow):
                                      f"Type Code (TC)\t\t : {typeCode} - Airborne position (with GNSS altitude)\n"
                                      f"ICAO\t\t\t : {icao}\n"
                                      f"CPR Format\t\t : {'Odd' if cprFormat else 'Even'}\n"
-                                     f"CPR Latitude\t\t : {cprLat}\n"
-                                     f"CPR Longitude\t\t : {cprLon}\n"
+                                     f"CPR Latitude\t\t : {cprLat} - {cprLat / 131072.0}\n"
+                                     f"CPR Longitude\t\t : {cprLon} - {cprLon / 131072.0}\n"
                                      f"Altitude\t\t\t : {altitude} feet\n"
                                      f"Vertical Status \t\t : Airborne\n\n"
                                      f"\t\t\t\t| DF       | CA   | ICAO                                             | ME                                                                                                           | PI                                                |\n"
@@ -303,20 +303,19 @@ class DecoderWindow(QtWidgets.QMainWindow):
                                      f"\t\t\t\t| {len(dataFrameBinary)}         | {len(transponderBinary)}     | {len(icaoBinary)}                                                  | {len(messageBinary)}                                                                                                             | {len(parityBinary)}                                                |\n"
                                      f"")
 
-        if typeCode == 31:
-            subType = pms.bin2int(adsbBinary[37:40])
-            compassHeading = ""
+            if typeCode == 31:
+                subType = pms.bin2int(adsbBinary[37:40])
+                compassHeading = ""
 
-            if subType == 0:
-                compassHeading = "True North"
-            if subType == 1:
-                compassHeading = "Magnetic North"
+                if subType == 0:
+                    compassHeading = "True North"
+                if subType == 1:
+                    compassHeading = "Magnetic North"
 
             self.textBoxAdsb.setText(f"Frame\t\t\t : {message} \n"
                                      f"Length\t\t\t : {lengthBit} bits\n"
                                      f"Downlink Format (DF)\t : ({dataFrame}) ADS-B \n"
                                      f"Type Code (TC)\t\t : {typeCode} - Aircraft Operation Status\n"
-                                     f"Vertical Status \t\t : On The Ground\n"
                                      f"Sub Type\t\t\t : {subType}\n"
                                      f"Compass Heading\t : {compassHeading}\n\n"  # Data masih belum akurat
                                      f"\t\t\t\t| DF       | CA   | ICAO                                             | ME                                                                                                           | PI                                                |\n"
