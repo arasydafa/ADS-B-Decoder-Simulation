@@ -3,7 +3,7 @@ import sys
 import pyModeS as pms
 from PyQt5 import QtWidgets, uic, QtGui, QtCore
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QGraphicsDropShadowEffect, QMessageBox
+from PyQt5.QtWidgets import QGraphicsDropShadowEffect
 from PyQt5.QtCore import QTimer, QTime, QDate, pyqtSlot
 
 
@@ -303,14 +303,14 @@ class DecoderWindow(QtWidgets.QMainWindow):
                                      f"\t\t\t\t| {len(dataFrameBinary)}         | {len(transponderBinary)}     | {len(icaoBinary)}                                                  | {len(messageBinary)}                                                                                                             | {len(parityBinary)}                                                |\n"
                                      f"")
 
-        if typeCode == 31:
-            subType = pms.bin2int(adsbBinary[37:40])
-            compassHeading = ""
+            if typeCode == 31:
+                subType = pms.bin2int(adsbBinary[37:40])
+                compassHeading = ""
 
-            if subType == 0:
-                compassHeading = "True North"
-            if subType == 1:
-                compassHeading = "Magnetic North"
+                if subType == 0:
+                    compassHeading = "True North"
+                if subType == 1:
+                    compassHeading = "Magnetic North"
 
             self.textBoxAdsb.setText(f"Frame\t\t\t : {message} \n"
                                      f"Length\t\t\t : {lengthBit} bits\n"
