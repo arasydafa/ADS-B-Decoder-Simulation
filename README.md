@@ -24,10 +24,10 @@ pip install -r requirements.txt
 To run the code, simply clone the repository and navigate to the directory containing the code. Run the following command in your terminal or command prompt:
 ``` shell
 # For Windows
-python main.py
+python script/menu.py
 
 # For Linux
-python3 main.py
+python3 script/menu.py
 ```
 
 ## Features
