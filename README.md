@@ -16,7 +16,12 @@ The following packages are required to run the code in this repository:
 To install the required packages, run the following command in your terminal or command prompt:
 ``` shell
 # Install required package using pip
+
+# For Windows
 pip install -r requirements.txt
+
+# For Linux
+pip3 install -r requirements.txt
 ```
 
 ## Usage
