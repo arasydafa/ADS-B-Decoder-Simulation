@@ -14,7 +14,7 @@ The following packages are required to run the code in this repository:
 ## Installation
 
 To install the required packages, run the following command in your terminal or command prompt:
-``` shell
+```shell
 # Install required package using pip
 
 # For Windows
@@ -27,7 +27,7 @@ pip3 install -r requirements.txt
 ## Usage
 
 To run the code, simply clone the repository and navigate to the directory containing the code. Run the following command in your terminal or command prompt:
-``` shell
+```shell
 # For Windows
 python script/menu.py
 
